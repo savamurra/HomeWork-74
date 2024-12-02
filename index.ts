@@ -1,7 +1,7 @@
 import express from "express";
 import messageRouter from "./routers/messages";
 import fileDb from "./fileDb";
-import { promises as fs } from "fs";
+import {promises as fs} from "fs";
 import path from "path";
 
 const app = express();
@@ -20,15 +20,15 @@ const messagesFolder = path.join(__dirname, "messages");
 
 const run = async () => {
     const fileName = generateFileName();
-   try {
-       await fs.access(fileName);
-       await fileDb.init();
-   } catch (e) {
-       console.error(e);
-       await fs.mkdir(messagesFolder, { recursive: true });
-       await fs.writeFile(fileName, JSON.stringify([]));
-       await fileDb.init();
-   }
+    try {
+        await fs.access(fileName);
+        await fileDb.init();
+    } catch (e) {
+        console.error(e);
+        await fs.mkdir(messagesFolder, {recursive: true});
+        await fs.writeFile(fileName, JSON.stringify([]));
+        await fileDb.init();
+    }
 
     app.listen(port, () => {
         console.log(`Server is running at http://localhost:${port}`);
@@ -36,5 +36,5 @@ const run = async () => {
 }
 
 run().catch(err => {
-    console.log(err)
+    console.log(err);
 });

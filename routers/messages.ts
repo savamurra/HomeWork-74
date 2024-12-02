@@ -1,17 +1,19 @@
 import express from "express";
-import fileDb from "../fileDb";
+
 import {MessageWithoutId} from "../types";
+import fileDb from "../fileDb";
 
 const messageRouter = express.Router();
 
+
 messageRouter.get("/", async (req, res) => {
-    const messages = await fileDb.getItems();
-    res.send(messages);
+        const messages = await fileDb.getItems();
+        res.send(messages);
 });
 
-messageRouter.get("/:id", async (req, res) => {
+messageRouter.get("/:dateTime", async (req, res) => {
     const message = await fileDb.getItems();
-    const messageFindById = message.find((message) => message.id === req.params.id);
+    const messageFindById = message.find((message) => message.dateTime === req.params.dateTime);
     res.send(messageFindById);
 });
 
