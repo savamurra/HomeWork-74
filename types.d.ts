@@ -3,4 +3,4 @@ export interface Message {
     dateTime: string;
 }
 
-export type MessageWithoutId = Omit<Message, "id">
+export type MessageWithoutId = Omit<Message, "dateTime">
